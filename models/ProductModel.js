@@ -50,10 +50,20 @@ const update = async ({ id, name, quantity }) => {
   }
 };
 
+const exclude = async (id) => {
+  try {
+    const [product] = await connection.execute('DELETE FROM products WHERE id = ?', [id]);
+    return product;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 module.exports = {
   getAll, 
   getById,
   getByName,
   create,
   update,
+  exclude,
 };

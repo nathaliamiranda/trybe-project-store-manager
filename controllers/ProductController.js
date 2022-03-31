@@ -55,4 +55,17 @@ router.put('/:id', async (req, res, next) => {
   }
 });
 
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const product = await ProductService.exclude(id);
+   
+    if (product === false) return res.status(404).send({ message: 'Product not found' });
+    return res.status(204).end();
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;
