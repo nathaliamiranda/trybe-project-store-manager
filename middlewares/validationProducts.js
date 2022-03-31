@@ -1,5 +1,5 @@
-const validationProducts = (req, res, next) => {
-  const { name, quantity } = req.body;
+const validationProductsName = (req, res, next) => {
+  const { name } = req.body;
 
   if (!('name' in req.body)) {
     return res.status(400).json({ message: '"name" is required' });
@@ -7,6 +7,11 @@ const validationProducts = (req, res, next) => {
   if (name.length < 5) {
     return res.status(422).json({ message: '"name" length must be at least 5 characters long' });
   }
+  next();
+};
+
+const validationProductsQuantity = (req, res, next) => {
+  const { quantity } = req.body;
 
   if (!('quantity' in req.body)) {
     return res.status(400).json({ message: '"quantity" is required' });
@@ -18,4 +23,7 @@ const validationProducts = (req, res, next) => {
   next();
 };
 
-module.exports = validationProducts;
+module.exports = {
+  validationProductsName,
+  validationProductsQuantity,
+};

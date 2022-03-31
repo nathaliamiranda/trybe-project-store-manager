@@ -1,16 +1,14 @@
 const express = require('express');
 const SaleService = require('../services/SaleService');
-const validationSale = require('../middlewares/validationSale');
+const { salesProductsValidate, typeOfNumberValidate } = require('../middlewares/validationSale');
 
 const router = express.Router();
 
-router.put('/:id', validationSale, async (req, res, next) => {
+router.put('/:id', salesProductsValidate, typeOfNumberValidate, async (req, res, next) => {
   try {
-    const sales = req.body[0];
     const { id } = req.params;
-    sales.saleId = id;
   
-    const salesProduct = await SaleService.update(sales);
+    const salesProduct = await SaleService.update(req.body, id);
   
     return res.status(200).json(salesProduct);
   } catch (err) {
@@ -41,7 +39,7 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.post('/', validationSale, async (req, res, next) => {
+router.post('/', salesProductsValidate, async (req, res, next) => {
   try {
     const arrayProducts = req.body;
 

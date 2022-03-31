@@ -13,8 +13,8 @@ const create = async (arrayProducts) => {
   return createProduct;
 };
 
-const update = async (sale) => {
-  const updateProduct = await SaleModel.update(sale);
+const update = async (sales, id) => {
+  const updateProduct = await SaleModel.update(sales, id);
   console.log(updateProduct);
   return updateProduct;
 };

@@ -19,4 +19,23 @@ const salesProductsValidate = (req, res, next) => {
   next();
 };
 
-module.exports = salesProductsValidate;
+const typeOfNumberValidate = (req, res, next) => {
+  req.body.forEach(({ quantity, productId }) => {
+    if (typeof quantity !== 'number') {
+      return res.status(400).json(
+        { message: '"quantity" must be a number' },
+      );
+    }
+    if (typeof productId !== 'number') {
+      return res.status(400).json(
+        { message: '"productId" must be a number' },
+      );
+    }
+  });
+  next();
+};
+
+module.exports = {
+  salesProductsValidate,
+  typeOfNumberValidate,
+};

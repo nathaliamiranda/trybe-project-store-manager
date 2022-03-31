@@ -57,20 +57,20 @@ const create = async (arrayProducts) => {
   }
 };
 
-const update = async ({ quantity, saleId, productId }) => {
+const update = async (arrayProducts, id) => {
   try {
-    await connection
-    .execute(
-      'UPDATE StoreManager.sales_products SET product_id = ?, quantity = ? WHERE sale_id = ?',
-     [productId, quantity, saleId],
-);
-     return { 
-       saleId, 
-       itemUpdated: [{
-        productId, 
-        quantity,
-       }],
-     };
+    const saleProduct = arrayProducts.map(({ productId, quantity }) =>
+      connection.execute(
+        'UPDATE StoreManager.sales_products SET product_id = ?, quantity = ? WHERE sale_id = ?',
+     [productId, quantity, id],
+      ));
+
+    await Promise.all(saleProduct);
+
+    return {
+      saleId: id,
+      itemUpdated: arrayProducts,
+    };
   } catch (err) {
     console.error(err);
   }
