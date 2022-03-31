@@ -3,16 +3,16 @@ const ProductModel = require('../models/ProductModel');
 const getAll = async () => ProductModel.getAll();
 
 const getById = async (id) => {
-    const product = await ProductModel.getById(id);
-    if (!product) return null;
+  const product = await ProductModel.getById(id);
+  if (!product) return null;
 
-    return product;
+  return product;
 };
 const create = async (name, quantity) => {
   const productExist = await ProductModel.getByName(name);
-   
+
   if (productExist.length) return null;
-   
+
   const product = await ProductModel.create(name, quantity);
 
   return product;
@@ -25,7 +25,7 @@ const update = async (id, name, quantity) => {
 
   const product = await ProductModel.update({ id, name, quantity });
 
- return product;
+  return product;
 };
 
 const exclude = async (id) => {
@@ -39,9 +39,9 @@ const exclude = async (id) => {
 };
 
 module.exports = {
-    getAll,
-    getById,
-    create,
-    update,
-    exclude,
+  getAll,
+  getById,
+  create,
+  update,
+  exclude,
 };

@@ -8,16 +8,16 @@ const getAll = async () => {
     console.error(err);
   }
 };
-  
+
 const getById = async (id) => {
   try {
     const [result] = await connection
-      .execute('SELECT * FROM products WHERE id = ? ORDER BY id;', 
-      [id]);
-      return result;
-    } catch (err) {
-        console.error(err);
-    }
+      .execute('SELECT * FROM products WHERE id = ? ORDER BY id;',
+        [id]);
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 const getByName = async (name) => {
@@ -32,8 +32,8 @@ const getByName = async (name) => {
 const create = async (name, quantity) => {
   try {
     const [result] = await connection
-    .execute('INSERT INTO products (name, quantity) VALUES (?, ?);',
-      [name, quantity]);
+      .execute('INSERT INTO products (name, quantity) VALUES (?, ?);',
+        [name, quantity]);
     return { id: result.insertId, name, quantity };
   } catch (err) {
     console.error(err);
@@ -43,7 +43,7 @@ const create = async (name, quantity) => {
 const update = async ({ id, name, quantity }) => {
   try {
     await connection
-    .execute('UPDATE products SET name = ?, quantity = ? WHERE id = ?', [name, quantity, id]);
+      .execute('UPDATE products SET name = ?, quantity = ? WHERE id = ?', [name, quantity, id]);
     return { id, name, quantity };
   } catch (err) {
     console.error(err);
@@ -60,7 +60,7 @@ const exclude = async (id) => {
 };
 
 module.exports = {
-  getAll, 
+  getAll,
   getById,
   getByName,
   create,
