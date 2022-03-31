@@ -1,6 +1,6 @@
 const express = require('express');
 const ProductService = require('../services/ProductService');
-// const validationProducts = require('../middlewares/validationProducts');
+const validationProducts = require('../middlewares/validationProducts');
 
 const router = express.Router();
 
@@ -28,7 +28,7 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', validationProducts, async (req, res, next) => {
   try {
     const { name, quantity } = req.body;
 
@@ -42,7 +42,7 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', validationProducts, async (req, res, next) => {
   try {
     const { name, quantity } = req.body;
     const { id } = req.params;
