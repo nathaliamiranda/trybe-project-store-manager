@@ -4,7 +4,7 @@ const { expect } = require('chai');
 const productModel = require('../../../models/ProductModel');
 const productService = require('../../../services/ProductService');
 
-describe('Testa o Products Service', () => {
+describe('Testa o ProductsService', () => {
   request = {};
   response = {};
 
@@ -43,11 +43,9 @@ describe('Testa o Products Service', () => {
   });
 });
 
-describe('Função getById', () => {
-
-  request.params = { id: 1 };
-
-  describe('Verifica se o produto buscado pelo "id" existe', () => {
+describe('Verifica na função getById se o produto buscado pelo "id" existe', () => {
+    request.params = { id: 1 };
+    
     const product = [{
       id: 1,
       name: "produto",
@@ -67,4 +65,3 @@ describe('Função getById', () => {
       expect(response).to.be.an('array');
     });
   });
-});
