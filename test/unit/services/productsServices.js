@@ -41,7 +41,6 @@ describe('Testa o ProductsService', () => {
       expect(response).to.be.equal(arrayProducts);
     });
   });
-});
 
 describe('Verifica na função getById se o produto buscado pelo "id" existe', () => {
     request.params = { id: 1 };
@@ -63,5 +62,29 @@ describe('Verifica na função getById se o produto buscado pelo "id" existe', (
     it('Verifica se retorna um array com o produto', async () => {
       const response = await productService.getById(1);
       expect(response).to.be.an('array');
-    });
+    }); 
   });
+    describe(' Verifica se a função update retorna o produto atualizado', () => {
+      const product =
+        {
+          id: 1,
+          name: "produto",
+          quantity: 4
+        }
+      before(() => {  
+        sinon.stub(productModel, 'update').resolves(product);
+        sinon.stub(productModel, 'getById').resolves([product])
+      });
+
+      after(() => {
+        productModel.update.restore();
+        productModel.getById.restore();
+      });
+
+      it('Verifica se retorna um objeto', async () => {
+        const response = await productService.update(product);
+
+        expect(response).to.be.an('object');
+      });
+    });
+});
