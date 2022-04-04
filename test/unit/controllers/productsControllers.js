@@ -59,7 +59,7 @@ describe('Verifica se retorna os produtos corretamente', () => {
       productService.getById.restore();
     });
 
-    it('Verifica se retorna um objeto com o produto', async () => {
+    it('Verifica se retorna o status 200', async () => {
       await productController.getById(req, res);
       expect(res.status.calledWith(200)).to.be.equal(true);
     });

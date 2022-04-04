@@ -8,29 +8,6 @@ describe('Testa o SaleController', () => {
   const response = {};
   const request = {};
 
-  describe('Verifica se a função getAll mostra quando a sale não é encontrada', () => {
-    before(() => {
-      response.status = sinon.stub().returns(response);
-      response.json = sinon.stub().returns();
-
-      sinon.stub(SaleService, 'getAll').resolves(false);
-    });
-
-    after(async () => {
-      SaleService.getAll.restore();
-    });
-
-    it('Espera que o status retorne o código 404', async () => {
-      await SaleController.getAll(request, response);
-      expect(response.status.calledWith(404)).to.be.equal(true);
-    });
-
-    it('Espera que o json retorne a mensagem "Sale not found"', async () => {
-      await SaleController.getAll(request, response);
-      expect(response.json.calledWith({message: 'Sale not found' })).to.be.equal(true);
-    });
-  });
-
   describe('Verifica se a função getAll retorna todas as vendas', () => {
     const getSales = [
       {
