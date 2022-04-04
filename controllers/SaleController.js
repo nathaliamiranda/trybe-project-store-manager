@@ -1,10 +1,6 @@
-const express = require('express');
 const SaleService = require('../services/SaleService');
-const { salesProductsValidate, typeOfNumberValidate } = require('../middlewares/validationSale');
 
-const router = express.Router();
-
-router.put('/:id', salesProductsValidate, typeOfNumberValidate, async (req, res, next) => {
+const update = async (req, res, next) => {
   try {
     const { id } = req.params;
   
@@ -14,9 +10,9 @@ router.put('/:id', salesProductsValidate, typeOfNumberValidate, async (req, res,
   } catch (err) {
     next(err);
   }
-});
+};
 
-router.get('/', async (_req, res, next) => {
+const getAll = async (_req, res, next) => {
   try {
     const sales = await SaleService.getAll();
 
@@ -24,9 +20,9 @@ router.get('/', async (_req, res, next) => {
   } catch (err) {
     next(err);
   }
-});
+};
 
-router.get('/:id', async (req, res, next) => {
+const getById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const product = await SaleService.getById(id);
@@ -37,9 +33,9 @@ router.get('/:id', async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-});
+};
 
-router.post('/', salesProductsValidate, async (req, res, next) => {
+const create = async (req, res, next) => {
   try {
     const arrayProducts = req.body;
 
@@ -49,6 +45,11 @@ router.post('/', salesProductsValidate, async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-});
+};
 
-module.exports = router;
+module.exports = {
+  update,
+  getAll,
+  getById,
+  create,
+};

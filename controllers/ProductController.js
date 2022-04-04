@@ -1,20 +1,15 @@
-const express = require('express');
 const ProductService = require('../services/ProductService');
-const { validationProductsName, 
-  validationProductsQuantity } = require('../middlewares/validationProducts');
 
-const router = express.Router();
-
-router.get('/', async (_req, res, next) => {
+const getAll = async (_req, res, next) => {
   try {
     const products = await ProductService.getAll();
     res.status(200).json(products);
   } catch (err) {
     next(err);
   }
-});
+};
 
-router.get('/:id', async (req, res, next) => {
+const getById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const [product] = await ProductService.getById(id);
@@ -27,9 +22,9 @@ router.get('/:id', async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-});
+};
 
-router.post('/', validationProductsQuantity, validationProductsName, async (req, res, next) => {
+const create = async (req, res, next) => {
   try {
     const { name, quantity } = req.body;
 
@@ -41,9 +36,9 @@ router.post('/', validationProductsQuantity, validationProductsName, async (req,
   } catch (err) {
     next(err);
   }
-});
+};
 
-router.put('/:id', validationProductsQuantity, validationProductsName, async (req, res, next) => {
+const update = async (req, res, next) => {
   try {
     const { name, quantity } = req.body;
     const { id } = req.params;
@@ -55,9 +50,9 @@ router.put('/:id', validationProductsQuantity, validationProductsName, async (re
   } catch (err) {
     next(err);
   }
-});
+};
 
-router.delete('/:id', async (req, res, next) => {
+const exclude = async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -68,6 +63,12 @@ router.delete('/:id', async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-});
+};
 
-module.exports = router;
+module.exports = {
+  getAll,
+  getById,
+  create,
+  update,
+  exclude,
+};
