@@ -21,5 +21,5 @@ O banco utilizado para gestão de dados foi o MySQL. Além disso, foi desenvolvi
 
 
 ## Como executar o projeto
-- Execute o npm install para instalar as dependencias. 
-- Utilize uma ferramenta para a execução de testes das requisições feitas pela API, como o Postman ou o Insomnia.
+- Execute o npm install para instalar as dependencias;
+- Utilize uma ferramenta para a execução de testes das requisições feitas pela API, como o Postman ou o Insomnia;
