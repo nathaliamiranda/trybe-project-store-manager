@@ -17,8 +17,10 @@ Projeto desenvolvido no bloco 23 de Back-end!
 Foi realizada uma aplicação em Node.js, desenvolvendo todas as camadas da API (Models, Services e Controllers).
 
 Através dessa aplicação, é possível realizar as operações básicas que se pode fazer em um determinado banco de dados: Criação, Leitura, Atualização e Exclusão (CRUD).
+
 O banco utilizado para gestão de dados foi o MySQL. Além disso, foi desenvolvido testes unitários na aplicação utilizando mocha, chai e sinon.
 
+A estrutura do banco de dados foi feita pela trybe.
 
 ## Como executar o projeto
 - Execute o npm install para instalar as dependencias;
